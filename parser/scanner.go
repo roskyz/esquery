@@ -121,7 +121,7 @@ func (s *scanner) operateOnTop() error {
 
 	if (operator.IsOperatorNOT() ||
 		operator.IsOperatorAND() ||
-		operator.IsOperatorOR()) && (s.operatorStack.Length() < operator.operandNum) {
+		operator.IsOperatorOR()) && (s.operandStack.Length() < operator.operandNum) {
 		return ErrUnbalancedParentheses
 	}
 
@@ -137,7 +137,9 @@ func (s *scanner) operateOnTop() error {
 		rightOperand := s.operandStack.Pop()
 		leftOperand := s.operandStack.Pop()
 		s.operandStack.Push(Or(leftOperand, rightOperand))
+	default:
+		return ErrUnexpectedOperator
 	}
 
-	return ErrUnexpectedOperator
+	return nil
 }

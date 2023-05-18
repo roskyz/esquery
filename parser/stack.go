@@ -7,7 +7,7 @@ type sizedStack[T any] struct {
 
 func newStack[T any](size int) *sizedStack[T] {
 	return &sizedStack[T]{
-		size: size, elements: make([]T, size),
+		size: 0, elements: make([]T, size),
 	}
 }
 
