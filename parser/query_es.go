@@ -36,9 +36,9 @@ func (n *node) GenEsQuery() elastic.Query {
 	case patternPREFIX:
 		return elastic.NewPrefixQuery(key.keyword(), value)
 	case patternSUFFIX:
-		return elastic.NewRegexpQuery(key.keyword(), ".*"+value)
+		return elastic.NewRegexpQuery(key.keyword(), ".*"+value+"$")
 	case patternREGEX:
-		return elastic.NewRegexpQuery(key.keyword(), ".*"+value+".*")
+		return elastic.NewRegexpQuery(key.keyword(), value)
 	case patternEQ:
 		return elastic.NewTermQuery(key.string(), value)
 	case patternLT:
